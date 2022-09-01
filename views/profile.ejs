@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Profile</title>
+	</head>
+	<body>
+		<a href="/dashboard">dashboard</a>
+		<a href="/search">search</a>
+		<a href="/new_article">create a new article</a>
+		<a href="/profile">profile</a>
+
+		<h1>My Profile</h1>
+		<br />
+		<% if(alreadyFollowingParamsUser === false){ %>
+		<button class="follow-button" id="<%= user.username%>">
+			Follow this User
+		</button>
+		<% }%>
+		<div>
+			<h2><%= user.username %></h2>
+			<img src="<%= user.profile_pic %>" />
+			<br />
+		</div>
+		<% articles.forEach((article) =>{ %>
+		<hr />
+		<div>
+			<h2><%= article.title %></h2>
+			<img src="<%= article.image %>" />
+			<br />
+			<p><%= article.description %></p>
+			<span>
+				<% article.tags.forEach((tag) => { %>
+				<a class="article-tag" href="/search/<%= tag %>"><%= tag %></a>
+				<% }) %>
+			</span>
+		</div>
+		<% }) %>
+
+		<script>
+			document
+				.getElementsByClassName("follow-button")[0]
+				.addEventListener("click", function (e) {
+					let data = JSON.stringify({ username: e.target.id });
+					fetch("/user/follower/new", {
+						method: "POST",
+						body: data,
+						headers: {
+							"Content-Type": "application/json",
+						},
+						credentials: "same-origin",
+					}).then(function () {
+						window.location.href = "/";
+					});
+				});
+		</script>
+	</body>
+</html>

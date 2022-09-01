@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dashboard</title>
+	</head>
+	<body>
+		<a href="/dashboard">Dashboard</a>
+		<a href="/search">Search</a>
+		<a href="/create_article">Create an Article</a>
+		<a href="/profile">Profile</a>
+
+		<h1>Dashboard</h1>
+		<% articles.forEach((article) =>{ %>
+		<h2><%= article.title %></h2>
+		<p>
+			Created By
+			<a href="/user/profile/<%= article.author.username %>">
+				<%= article.author.username %></a
+			>
+		</p>
+		<img src="<%= article.image %>" />
+		<p><%= article.description %></p>
+		<% article.tags.forEach((tag) => { %>
+		<a href="/search/<%= tag %>"><%= tag %></a>
+		<% }) %> 
+		<% }) %>
+	</body>
+</html>
