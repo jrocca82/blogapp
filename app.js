@@ -14,8 +14,8 @@ const baseRoutes = require("./controller/routes/base.routes"),
 
 //DB Connections
 const key = require("./key"),
-	db = process.env.MONGO_URI,
-	port = process.env.PORT || 3000;
+	db = process.env.MONGO_ATLAS_URI,
+	port = 3000;
 
 mongoose.connect(db);
 
